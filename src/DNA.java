@@ -6,7 +6,7 @@ public class DNA {
     private String rna;
     private String startSequence;
     private HashSet<String> endSequences;
-    private int startIndex = -1;
+    private int startIndex;
     private int endIndex = -1;
 
 
@@ -16,27 +16,18 @@ public class DNA {
         this.dna = dna;
         this. startSequence = startSequence;
         this.endSequences = endSequences;
+        this.startIndex = this.dna.indexOf(this.startSequence);
+        findEnd();
     }
 
 
 
 
     public void findEnd() {
-        for (int i = 3; i < this.dna.length()-3; i+=3) {
-            if (this.endSequences.contains(this.dna.substring(i, i+3).toUpperCase())) {
-                this.endIndex = i+3;
+        for (String s : this.endSequences) {
+            if (this.dna.substring(startIndex).contains(s) && this.dna.substring(startIndex).indexOf(s) % 3 == 0) {
+                this.endIndex = this.dna.substring(startIndex).indexOf(s);
             }
         }
     }
-
-
-    public void findStart() {
-        int startIndex = -1;
-        for (int i = 0; i < this.dna.length()-3; i++) {
-            if (this.dna.substring(i, i+3).equals(this.startSequence)) {
-                this.startIndex = i;
-            }
-        }
-    }
-
 }
