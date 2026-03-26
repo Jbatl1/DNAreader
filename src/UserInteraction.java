@@ -40,7 +40,7 @@ public class UserInteraction {
             }
             else break;
         }
-        return s;
+        return s.toUpperCase();
     }
 
     public HashSet<String> getEndCodons() {
@@ -63,28 +63,21 @@ public class UserInteraction {
 
 
     private String nameDNA() {
-
+        System.out.println("Enter the name of the sequence: ");
+        return scanner.nextLine();
     }
 
     private void createDNA () {
 
         String filePath = getFilePath();
+        String name = nameDNA();
         String dna = getDNA(filePath);
         String startSequence = getStartSequence();
         HashSet<String> ends = getEndCodons();
 
+        DNA dna1 = new DNA(name, dna, startSequence, ends);
+        System.out.println(dna1.toString());
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -113,6 +106,7 @@ public class UserInteraction {
                         break;
                     case 2:
                         System.out.println("Add functionality for adding DNA sequence");
+                        createDNA();
                         break;
                     case 3:
                         System.out.println("Add functionality for loading a DNA sequence");
